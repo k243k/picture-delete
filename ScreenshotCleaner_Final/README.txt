@@ -4,10 +4,12 @@
 
 SUPER EASY INSTALLATION
 ------------------------
-1. Right-click "install_all.ps1"
-2. Select "Run with PowerShell"
-3. Press Enter when asked
-4. Done!
+Choose ONE file and double-click:
+
+- INSTALL_9AM.bat  = Delete at 9:00 AM
+- INSTALL_3PM.bat  = Delete at 3:00 PM
+
+That's it! Just double-click!
 
 WHAT IT DOES
 ------------
