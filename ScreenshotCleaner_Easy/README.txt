@@ -1,32 +1,48 @@
 ========================================
-  ScreenshotCleaner かんたん使い方
+  ScreenshotCleaner - Easy Setup
 ========================================
 
-【これは何？】
-毎朝9時にスクリーンショットを自動で削除するツールです。
-※削除したファイルは復元できません！
+WHAT IS THIS?
+-------------
+Automatically deletes screenshots at 9:00 AM every day.
+WARNING: Deleted files CANNOT be recovered!
 
-【使い方】3ステップだけ！
+HOW TO USE - Just 3 Steps!
+--------------------------
+1. Double-click "setup.bat"
+2. Press "Y" to test
+3. Done!
 
-1. setup.bat をダブルクリック
-2. 「Y」を押してテスト
-3. 完了！
+Your screenshots will be deleted automatically at 9:00 AM daily.
 
-明日から毎朝9時に自動削除されます。
+WHAT GETS DELETED?
+------------------
+- Pictures\Screenshots folder (all images)
+- Videos\Captures folder (all images)
+- Desktop Screenshot*.png/jpg files only
 
-【削除される場所】
-- ピクチャ\Screenshots フォルダ
-- ビデオ\Captures フォルダ  
-- デスクトップのScreenshot*.png/jpg
+TEST NOW
+--------
+Double-click "test.bat"
 
-【今すぐテストしたい】
-test_now.bat をダブルクリック
+CHECK STATUS
+------------
+Double-click "status.bat"
 
-【やめたい時】
-uninstall.bat をダブルクリック
+UNINSTALL
+---------
+Double-click "uninstall.bat"
 
-【注意】
-削除されたファイルは二度と戻せません！
-大切なスクリーンショットは別の場所に保存してください。
+IMPORTANT
+---------
+- Files are PERMANENTLY deleted (not sent to Recycle Bin)
+- Cannot be recovered once deleted
+- Save important screenshots elsewhere first!
+
+TROUBLESHOOTING
+---------------
+If setup fails:
+1. Right-click setup.bat
+2. Select "Run as administrator"
 
 ========================================

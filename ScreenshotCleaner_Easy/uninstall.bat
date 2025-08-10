@@ -1,21 +1,30 @@
 @echo off
-chcp 932 >nul 2>&1
+setlocal enabledelayedexpansion
 
 echo ========================================
-echo   ScreenshotCleaner アンインストール
+echo   ScreenshotCleaner Uninstall
 echo ========================================
 echo.
 
-echo タスクを削除中...
+echo Removing scheduled task...
 schtasks /Delete /TN "ScreenshotCleaner9AM" /F >nul 2>&1
-
-echo ファイルを削除中...
-set INSTALL_DIR=%LOCALAPPDATA%\ScreenshotCleaner
-if exist "%INSTALL_DIR%" (
-    rmdir /S /Q "%INSTALL_DIR%"
+if !ERRORLEVEL! EQU 0 (
+    echo     OK: Task removed
+) else (
+    echo     Task not found
 )
 
 echo.
-echo アンインストール完了
+echo Removing files...
+set INSTALL_DIR=%LOCALAPPDATA%\ScreenshotCleaner
+if exist "%INSTALL_DIR%" (
+    rmdir /S /Q "%INSTALL_DIR%"
+    echo     OK: Files removed
+) else (
+    echo     Files not found
+)
+
+echo.
+echo Uninstall complete
 echo.
 pause

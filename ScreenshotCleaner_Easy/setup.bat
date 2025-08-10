@@ -1,84 +1,142 @@
 @echo off
 setlocal enabledelayedexpansion
-chcp 932 >nul 2>&1
-title ScreenshotCleaner セットアップ
+title ScreenshotCleaner Setup
+color 0E
 
+cls
 echo ========================================
-echo   ScreenshotCleaner かんたんセットアップ
+echo   ScreenshotCleaner Easy Setup
 echo ========================================
 echo.
-echo このプログラムは毎朝9時にスクリーンショットを
-echo 自動削除します。
+echo This tool will DELETE your screenshots
+echo automatically at 9:00 AM every day.
 echo.
-echo ※削除したファイルは復元できません
+echo WARNING: Deleted files CANNOT be recovered!
 echo.
-pause
+echo Press any key to start setup...
+pause >nul
 
-echo.
-echo セットアップを開始します...
+cls
+echo ========================================
+echo   Installing...
+echo ========================================
 echo.
 
-REM 現在のフォルダを取得
+REM Get current directory
 set CURRENT_DIR=%~dp0
 set CURRENT_DIR=%CURRENT_DIR:~0,-1%
 
-REM インストール先フォルダ
+REM Install directory
 set INSTALL_DIR=%LOCALAPPDATA%\ScreenshotCleaner
 
-REM フォルダ作成
-echo ステップ 1/3: フォルダを準備中...
+REM Step 1: Create folder
+echo [1/4] Creating folder...
 if not exist "%INSTALL_DIR%" (
     mkdir "%INSTALL_DIR%" >nul 2>&1
+    if !ERRORLEVEL! NEQ 0 (
+        echo     FAILED: Cannot create folder
+        echo     Error code: !ERRORLEVEL!
+        pause
+        exit /b 1
+    )
+)
+echo     OK
+
+REM Step 2: Copy files
+echo [2/4] Copying files...
+set COPY_ERROR=0
+
+copy /Y "%CURRENT_DIR%\clean_screenshots.ps1" "%INSTALL_DIR%\" >nul 2>&1
+if !ERRORLEVEL! NEQ 0 set COPY_ERROR=1
+
+copy /Y "%CURRENT_DIR%\test.bat" "%INSTALL_DIR%\" >nul 2>&1
+if !ERRORLEVEL! NEQ 0 set COPY_ERROR=1
+
+copy /Y "%CURRENT_DIR%\uninstall.bat" "%INSTALL_DIR%\" >nul 2>&1
+if !ERRORLEVEL! NEQ 0 set COPY_ERROR=1
+
+copy /Y "%CURRENT_DIR%\status.bat" "%INSTALL_DIR%\" >nul 2>&1
+
+if !COPY_ERROR! EQU 0 (
+    echo     OK
+) else (
+    echo     FAILED: Cannot copy files
+    echo     Current folder: %CURRENT_DIR%
+    pause
+    exit /b 1
 )
 
-REM ファイルコピー
-echo ステップ 2/3: ファイルをコピー中...
-copy /Y "%CURRENT_DIR%\clean_screenshots.ps1" "%INSTALL_DIR%\" >nul 2>&1
-copy /Y "%CURRENT_DIR%\test_now.bat" "%INSTALL_DIR%\" >nul 2>&1
-copy /Y "%CURRENT_DIR%\uninstall.bat" "%INSTALL_DIR%\" >nul 2>&1
+REM Step 3: Remove old task
+echo [3/4] Cleaning old settings...
+schtasks /Delete /TN "ScreenshotCleaner9AM" /F >nul 2>&1
+echo     OK
 
-REM タスク登録
-echo ステップ 3/3: 自動実行を設定中...
+REM Step 4: Create task
+echo [4/4] Creating scheduled task...
 schtasks /Create /SC DAILY /ST 09:00 /TN "ScreenshotCleaner9AM" /TR "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"%INSTALL_DIR%\clean_screenshots.ps1\"" /F >nul 2>&1
 
-if %ERRORLEVEL% EQU 0 (
+if !ERRORLEVEL! EQU 0 (
+    echo     OK
     echo.
+    color 0A
     echo ========================================
-    echo    セットアップ完了！
+    echo   Setup Complete!
     echo ========================================
     echo.
-    echo 明日の朝9時から自動でスクリーンショットが
-    echo 削除されます。
+    echo Settings:
+    echo   Run time: Every day at 9:00 AM
+    echo   Location: %INSTALL_DIR%
     echo.
-    echo 今すぐテストしますか？
-    echo （どのファイルが削除されるか確認できます）
+    echo ----------------------------------------
     echo.
-    echo Y = テストする
-    echo N = 終了
+    echo Test now? (Check which files will be deleted)
     echo.
-    choice /C YN /N /M "選択してください (Y/N): "
+    echo   Y = Test (recommended)
+    echo   N = Exit
+    echo.
+    choice /C YN /N /M "Select (Y/N): "
     
     if !ERRORLEVEL! EQU 1 (
-        echo.
+        cls
         echo ========================================
-        echo テスト実行中（実際には削除しません）
+        echo   Test Mode (No files deleted)
         echo ========================================
         echo.
         powershell -ExecutionPolicy Bypass -File "%INSTALL_DIR%\clean_screenshots.ps1" -WhatIf
         echo.
         echo ========================================
-        echo 上記のファイルが毎朝削除されます
+        echo   Test Complete
         echo ========================================
+        echo.
+        echo These files will be deleted at 9:00 AM daily.
+        echo.
     )
 ) else (
+    color 0C
+    echo     FAILED
     echo.
-    echo エラー: セットアップに失敗しました
-    echo もう一度実行してください
+    echo ========================================
+    echo   Error
+    echo ========================================
+    echo.
+    echo Failed to create scheduled task.
+    echo Error code: !ERRORLEVEL!
+    echo.
+    echo Try running as Administrator:
+    echo 1. Right-click setup.bat
+    echo 2. Select "Run as administrator"
+    echo.
 )
 
+echo ========================================
 echo.
-echo アンインストール方法:
-echo %INSTALL_DIR%\uninstall.bat
-echo を実行してください
+echo Tools:
+echo   Check status: status.bat
+echo   Test now: test.bat  
+echo   Uninstall: uninstall.bat
 echo.
-pause
+echo Location:
+echo   %INSTALL_DIR%
+echo.
+echo Press any key to exit...
+pause >nul
