@@ -8,21 +8,17 @@
 - Files are PERMANENTLY deleted (not sent to Recycle Bin)
 - Cannot be recovered once deleted
 
-## Quick Start
+## Quick Start (超簡単！)
 
-### Option 1: Batch File (Recommended)
-1. Download ZIP from GitHub
-2. Extract `ScreenshotCleaner_Easy` folder
-3. Double-click `setup.bat`
-4. Press Y to test
-5. Done!
+### 2ステップで完了
+1. `ScreenshotCleaner_Simple` フォルダを開く
+2. 【1】と【2】を順番にダブルクリック
+3. 完了！
 
-### Option 2: PowerShell
-1. Download ZIP from GitHub
-2. Extract `ScreenshotCleaner_Easy` folder
-3. Right-click `INSTALL.ps1`
-4. Select "Run with PowerShell"
-5. Done!
+### Simple 2-Step Setup
+1. Open `ScreenshotCleaner_Simple` folder
+2. Double-click [1] then [2]
+3. Done!
 
 ## What Gets Deleted
 - `Pictures\Screenshots\` folder (all images)
