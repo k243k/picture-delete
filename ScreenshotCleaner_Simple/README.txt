@@ -28,6 +28,25 @@ Deletes these screenshots:
 
 WARNING: Files are PERMANENTLY deleted! Cannot be recovered!
 
+CHECK IF IT'S WORKING
+--------------------
+Double-click CHECK_STATUS.bat to see:
+- If task is installed
+- Next run time
+- Last run time
+
+CHANGE TIME
+-----------
+Double-click CHANGE_TIME.bat
+OR use command:
+schtasks /Change /TN "ScreenshotCleaner9AM" /ST 03:00
+
+Time examples:
+- 03:00 = 3:00 AM
+- 09:00 = 9:00 AM  
+- 15:00 = 3:00 PM
+- 21:00 = 9:00 PM
+
 TO UNINSTALL
 ------------
 Double-click UNINSTALL.bat
