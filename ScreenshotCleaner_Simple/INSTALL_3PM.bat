@@ -23,7 +23,9 @@ echo Creating scheduled task...
 schtasks /Delete /TN "ScreenshotCleaner3PM" /F >nul 2>&1
 schtasks /Create /SC DAILY /ST 15:00 /TN "ScreenshotCleaner3PM" /TR "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"%INSTALL_DIR%\clean_screenshots.ps1\"" /F
 
-if %ERRORLEVEL% EQU 0 (
+set TASK_RESULT=%ERRORLEVEL%
+
+if %TASK_RESULT% EQU 0 (
     cls
     echo ========================================
     echo   Installation Complete!
@@ -34,7 +36,10 @@ if %ERRORLEVEL% EQU 0 (
     echo Test now? (Y/N)
     choice /C YN /N /M "Select: "
     
-    if %ERRORLEVEL% EQU 1 (
+    if ERRORLEVEL 2 (
+        echo.
+        echo Setup complete. Task will run at 3:00 PM.
+    ) else (
         echo.
         echo Testing...
         echo.
@@ -43,6 +48,7 @@ if %ERRORLEVEL% EQU 0 (
         echo These files will be deleted at 3:00 PM
     )
 ) else (
+    echo.
     echo ERROR: Failed to create task
     echo Try running as Administrator
 )
