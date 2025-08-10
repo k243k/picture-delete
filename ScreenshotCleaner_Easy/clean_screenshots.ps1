@@ -4,7 +4,11 @@ param(
 )
 
 # ログ設定
-$logDir = Join-Path $env:LOCALAPPDATA "ScreenshotCleaner\logs"
+if ($env:LOCALAPPDATA) {
+    $logDir = Join-Path $env:LOCALAPPDATA "ScreenshotCleaner\logs"
+} else {
+    $logDir = Join-Path $env:USERPROFILE "AppData\Local\ScreenshotCleaner\logs"
+}
 if (-not (Test-Path $logDir)) {
     New-Item -ItemType Directory -Path $logDir -Force | Out-Null
 }
