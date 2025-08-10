@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 chcp 932 >nul 2>&1
 title ScreenshotCleaner セットアップ
 
