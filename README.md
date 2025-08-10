@@ -1,6 +1,8 @@
 # ScreenshotCleaner
 
-Automatically delete screenshots at 9:00 AM daily.
+スクリーンショットを毎日自動削除 / Automatically delete screenshots daily
+
+[日本語の説明はこちら](README_EASY_JP.md)
 
 ## ⚠️ WARNING
 - Files are PERMANENTLY deleted (not sent to Recycle Bin)
