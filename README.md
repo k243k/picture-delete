@@ -2,23 +2,25 @@
 
 スクリーンショットを毎日自動削除 / Automatically delete screenshots daily
 
-[日本語の説明はこちら](README_EASY_JP.md)
-
 ## ⚠️ WARNING
 - Files are PERMANENTLY deleted (not sent to Recycle Bin)
 - Cannot be recovered once deleted
 
-## Quick Start (超簡単！)
+## Quick Start (1-Click Install!)
 
-### 2ステップで完了
-1. `ScreenshotCleaner_Simple` フォルダを開く
-2. 【1】と【2】を順番にダブルクリック
-3. 完了！
+### Installation
+1. Open `ScreenshotCleaner_Final` folder
+2. Right-click `install_all.ps1`
+3. Select "Run with PowerShell"
+4. Press Enter
+5. Done!
 
-### Simple 2-Step Setup
-1. Open `ScreenshotCleaner_Simple` folder
-2. Double-click [1] then [2]
-3. Done!
+### 日本語説明
+1. `ScreenshotCleaner_Final` フォルダを開く
+2. `install_all.ps1` を右クリック
+3. 「PowerShellで実行」を選択
+4. Enterキーを押す
+5. 完了！
 
 ## What Gets Deleted
 - `Pictures\Screenshots\` folder (all images)
