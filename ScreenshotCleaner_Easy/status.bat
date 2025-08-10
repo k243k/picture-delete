@@ -56,4 +56,5 @@ if exist "%INSTALL_DIR%\logs" (
 echo.
 echo ========================================
 echo.
-pause
+echo Press any key to exit...
+pause >nul

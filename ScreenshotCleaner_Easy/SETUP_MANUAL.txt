@@ -1,0 +1,39 @@
+========================================
+手動セットアップ方法
+========================================
+
+setup.bat がエラーになる場合の対処法
+
+■ 方法1: コマンドプロンプトで直接実行
+------------------------------------------
+1. Windowsキー + R
+2. 「cmd」と入力してEnter
+3. 以下をコピペして実行：
+
+schtasks /Create /SC DAILY /ST 09:00 /TN "ScreenshotCleaner9AM" /TR "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"%LOCALAPPDATA%\ScreenshotCleaner\clean_screenshots.ps1\"" /F
+
+4. 「SUCCESS」と表示されれば完了
+
+■ 方法2: REGISTER_TASK_SIMPLE.bat を使う
+------------------------------------------
+1. REGISTER_TASK_SIMPLE.bat をダブルクリック
+2. 「SUCCESS」と表示されれば完了
+
+■ 時刻を変更したい場合
+------------------------------------------
+午前3時: /ST 03:00
+午後3時: /ST 15:00
+午後9時: /ST 21:00
+
+例：午前3時に変更
+schtasks /Change /TN "ScreenshotCleaner9AM" /ST 03:00
+
+■ 確認方法
+------------------------------------------
+schtasks /Query /TN "ScreenshotCleaner9AM"
+
+■ 今すぐテスト実行
+------------------------------------------
+schtasks /Run /TN "ScreenshotCleaner9AM"
+
+========================================
