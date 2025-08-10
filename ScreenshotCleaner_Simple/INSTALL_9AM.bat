@@ -1,11 +1,11 @@
 @echo off
-title Install ScreenshotCleaner - 9:00 AM
+title Install ScreenshotCleaner - 9:59 AM
 cls
 echo ========================================
-echo   ScreenshotCleaner - 9:00 AM Version
+echo   ScreenshotCleaner - 9:59 AM Version
 echo ========================================
 echo.
-echo This will delete screenshots at 9:00 AM daily
+echo This will delete screenshots at 9:59 AM daily
 echo.
 pause
 
@@ -21,7 +21,7 @@ copy /Y "%~dp0clean_screenshots.ps1" "%INSTALL_DIR%\clean_screenshots.ps1" >nul
 echo.
 echo Creating scheduled task...
 schtasks /Delete /TN "ScreenshotCleaner9AM" /F >nul 2>&1
-schtasks /Create /SC DAILY /ST 09:00 /TN "ScreenshotCleaner9AM" /TR "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"%INSTALL_DIR%\clean_screenshots.ps1\"" /F
+schtasks /Create /SC DAILY /ST 09:59 /TN "ScreenshotCleaner9AM" /TR "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File \"%INSTALL_DIR%\clean_screenshots.ps1\"" /F
 
 set TASK_RESULT=%ERRORLEVEL%
 
@@ -31,21 +31,21 @@ if %TASK_RESULT% EQU 0 (
     echo   Installation Complete!
     echo ========================================
     echo.
-    echo Screenshots will be deleted at 9:00 AM daily
+    echo Screenshots will be deleted at 9:59 AM daily
     echo.
     echo Test now? (Y/N)
     choice /C YN /N /M "Select: "
     
     if ERRORLEVEL 2 (
         echo.
-        echo Setup complete. Task will run at 9:00 AM.
+        echo Setup complete. Task will run at 9:59 AM.
     ) else (
         echo.
         echo Testing...
         echo.
         powershell -ExecutionPolicy Bypass -File "%INSTALL_DIR%\clean_screenshots.ps1" -WhatIf
         echo.
-        echo These files will be deleted at 9:00 AM
+        echo These files will be deleted at 9:59 AM
     )
 ) else (
     echo.
